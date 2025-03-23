@@ -182,37 +182,66 @@ public class Perpustakaan {
         } else {
             Buku buku = daftarBuku.get(nomorBuku - 1);
 
-            // Menampilkan informasi buku
-            System.out.println("\nInformasi Buku:");
-            buku.displayInfo();
+            // Menampilkan menu pilihan
+            System.out.println("\nPilih operasi yang ingin dilakukan:");
+            System.out.println("1. Tampilkan informasi buku");
+            System.out.println("2. Hitung jumlah kata sinopsis");
+            System.out.println("3. Hitung royalti (10%)");
+            System.out.println("4. Hitung royalti (persentase tertentu)");
+            System.out.println("5. Buat salinan buku");
+            System.out.println("6. Cek tingkat kesamaan dengan buku lain");
+            System.out.println("7. Keluar");
 
-            // Menghitung jumlah kata sinopsis
-            System.out.println("\nJumlah kata sinopsis: " + buku.hitungJumlahKataSinopsis());
-
-            // Menghitung royalti (1 parameter)
-            System.out.println("\nMasukkan harga buku untuk menghitung royalti (10%):");
-            double hargaBuku = scanner.nextDouble();
-            System.out.println("Royalti (10%): Rp" + buku.hitungRoyalti(hargaBuku));
-
-            // Menghitung royalti (2 parameter)
-            System.out.println("Masukkan persentase royalti (contoh: 15 untuk 15%):");
-            double persenRoyalti = scanner.nextDouble();
-            System.out.println("Royalti (" + persenRoyalti + "%): Rp" + buku.hitungRoyalti(hargaBuku, persenRoyalti));
-
-            // Membuat salinan buku
-            Buku bukuSalinan = buku.copy();
-            System.out.println("\nInformasi Buku Salinan:");
-            bukuSalinan.displayInfo();
-
-            // Cek plagiasi (tingkat kesamaan)
-            System.out.println("\nMasukkan nomor buku lain untuk memeriksa tingkat kesamaan:");
-            int nomorBukuLain = scanner.nextInt();
-            if (nomorBukuLain < 1 || nomorBukuLain > daftarBuku.size()) {
-                System.out.println("Nomor buku tidak valid.");
-            } else {
-                Buku bukuLain = daftarBuku.get(nomorBukuLain - 1);
-                double tingkatKesamaan = buku.cekTingkatKesamaan(bukuLain);
-                System.out.println("Tingkat kesamaan antara \"" + buku.getJudul() + "\" dan \"" + bukuLain.getJudul() + "\": " + tingkatKesamaan + "%");
+            int pilihan = scanner.nextInt();
+            switch (pilihan) {
+                case 1:
+                    // Menampilkan informasi buku
+                    System.out.println("\nInformasi Buku:");
+                    buku.displayInfo();
+                    break;
+                case 2:
+                    // Menghitung jumlah kata sinopsis
+                    System.out.println("\nJumlah kata sinopsis: " + buku.hitungJumlahKataSinopsis());
+                    break;
+                case 3:
+                    // Menghitung royalti (1 parameter)
+                    System.out.println("\nMasukkan harga buku untuk menghitung royalti (10%):");
+                    double hargaBuku = scanner.nextDouble();
+                    System.out.println("Royalti (10%): Rp" + buku.hitungRoyalti(hargaBuku));
+                    break;
+                case 4:
+                    // Menghitung royalti (2 parameter)
+                    System.out.println("\nMasukkan harga buku:");
+                    hargaBuku = scanner.nextDouble();
+                    System.out.println("Masukkan persentase royalti (contoh: 15 untuk 15%):");
+                    double persenRoyalti = scanner.nextDouble();
+                    System.out.println("Royalti (" + persenRoyalti + "%): Rp" + buku.hitungRoyalti(hargaBuku, persenRoyalti));
+                    break;
+                case 5:
+                    // Membuat salinan buku
+                    Buku bukuSalinan = buku.copy();
+                    System.out.println("\nInformasi Buku Salinan:");
+                    bukuSalinan.displayInfo();
+                    break;
+                case 6:
+                    // Cek plagiasi (tingkat kesamaan)
+                    System.out.println("\nMasukkan nomor buku lain untuk memeriksa tingkat kesamaan:");
+                    int nomorBukuLain = scanner.nextInt();
+                    if (nomorBukuLain < 1 || nomorBukuLain > daftarBuku.size()) {
+                        System.out.println("Nomor buku tidak valid.");
+                    } else {
+                        Buku bukuLain = daftarBuku.get(nomorBukuLain - 1);
+                        double tingkatKesamaan = buku.cekTingkatKesamaan(bukuLain);
+                        System.out.println("Tingkat kesamaan antara \"" + buku.getJudul() + "\" dan \"" + bukuLain.getJudul() + "\": " + tingkatKesamaan + "%");
+                    }
+                    break;
+                case 7:
+                    // Keluar dari program
+                    System.out.println("Terima kasih telah menggunakan program ini.");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak valid.");
+                    break;
             }
         }
 
